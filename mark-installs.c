@@ -119,7 +119,7 @@ void makeinstallpkg (char pkg[])
 		strcpy(yn,"y");
 	else
 	{
-		printf("\n\nError! Will not clean up.\n\n");
+		printf("\n\nError! Will not clean up.\n");
 		strcpy(yn,"n");
 	}
 	if (strcmp(yn,"y")==0||strcmp(yn,"Y")==0)
