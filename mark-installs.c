@@ -114,6 +114,7 @@ void makeinstallpkg (char pkg[])
 		error=1;
 	printf("Clean? (y/n) ");
 	if (automatic==0)
+		printf("y\n");
 		scanf("%3s",yn);
 	else if (error=0)
 		strcpy(yn,"y");
