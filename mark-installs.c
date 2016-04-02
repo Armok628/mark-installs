@@ -92,6 +92,8 @@ void makeinstallpkg (char pkg[])
 	printf("Is there more source code to install? (y/n) ");
 	if (automatic==0)
 		scanf("%3s",yn);
+	else
+		printf("n\n");
 	while (strcmp(yn,"y")==0)
 	{
 		system("ls -l");
@@ -106,7 +108,8 @@ void makeinstallpkg (char pkg[])
 	printf("Would you like to review the SlackBuild? (y/n) ");
 	if (automatic==0)
 		scanf("%s",yn);
-	printf("\n");
+	else
+		printf("n\n");
 	if (strcmp(yn,"y")==0||strcmp(yn,"Y")==0)
 		sprintf(nextcommand,"vi %s/%s.SlackBuild",pkg,pkg); system(nextcommand);
 	sprintf(nextcommand,"cd %s/ && ./%s.SlackBuild && installpkg /tmp/%s*",pkg,pkg,pkg);
@@ -114,12 +117,12 @@ void makeinstallpkg (char pkg[])
 		error=1;
 	printf("Clean? (y/n) ");
 	if (automatic==0)
+		scanf("%3s",yn);
+	else if (error==0)
 	{
 		printf("y\n");
-		scanf("%3s",yn);
-	}
-	else if (error==0)
 		strcpy(yn,"y");
+	}
 	else
 	{
 		printf("\n\nError! Will not clean up.\n");
