@@ -8,7 +8,7 @@ void copysourcepkg (char pkg[],char src[]);
 void showusage ();
 void uninstall (char pkg[]);
 
-int debug=0,automatic=0;
+int debug=0,automatic=0,error=0;
 
 int main (int argc,char *argv[])
 {
@@ -109,12 +109,19 @@ void makeinstallpkg (char pkg[])
 	printf("\n");
 	if (strcmp(yn,"y")==0||strcmp(yn,"Y")==0)
 		sprintf(nextcommand,"vi %s/%s.SlackBuild",pkg,pkg); system(nextcommand);
-	sprintf(nextcommand,"cd %s/ && ./%s.SlackBuild && installpkg /tmp/%s*",pkg,pkg,pkg); system(nextcommand);
+	sprintf(nextcommand,"cd %s/ && ./%s.SlackBuild && installpkg /tmp/%s*",pkg,pkg,pkg);
+	if (system(nextcommand)!=0)
+		error=1;
 	printf("Clean? (y/n) ");
 	if (automatic==0)
 		scanf("%3s",yn);
-	else
+	else if (error=0)
 		strcpy(yn,"y");
+	else
+	{
+		printf("\n\nError! Will not clean up.\n\n");
+		strcpy(yn,"n");
+	}
 	if (strcmp(yn,"y")==0||strcmp(yn,"Y")==0)
 	{
 		int i=0;
