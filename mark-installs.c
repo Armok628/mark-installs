@@ -118,7 +118,7 @@ void makeinstallpkg (char pkg[])
 		printf("y\n");
 		scanf("%3s",yn);
 	}
-	else if (error=0)
+	else if (error==0)
 		strcpy(yn,"y");
 	else
 	{
