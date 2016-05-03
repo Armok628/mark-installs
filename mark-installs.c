@@ -115,6 +115,15 @@ void makeinstallpkg (char pkg[])
 	sprintf(nextcommand,"cd %s/ && ./%s.SlackBuild && installpkg /tmp/%s*",pkg,pkg,pkg);
 	if (system(nextcommand)!=0)
 		error=1;
+	if (error==0)
+	{
+		if (debug==1)
+			printf("nextcommand = \"mv /tmp/%s* /home/PACKAGES/\"\n",pkg);
+		sprintf(nextcommand,"mv /tmp/%s* /home/PACKAGES/",pkg);
+		if (debug==1)
+			printf("nextcommand = \"%s\"\n",nextcommand);
+		system(nextcommand);
+	}
 	printf("Clean? (y/n) ");
 	if (automatic==0)
 		scanf("%3s",yn);
@@ -178,7 +187,7 @@ void uninstall(char pkg[])
 {
 	char nextcommand[100];
 	printf("Uninstalling \"%s\"\n",pkg);
-	sprintf(nextcommand,"removepkg %s && rm /tmp/%s*.tgz",pkg,pkg);
+	sprintf(nextcommand,"removepkg %s && rm /home/PACKAGES/%s*.tgz",pkg,pkg);
 	if (system(nextcommand)!=0)
 	{
 		do

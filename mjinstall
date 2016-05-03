@@ -19,6 +19,7 @@ if [[ "$1" = "-i" ]]; then
 		echo "Installing mark-installs"; echo -e
 		gcc -o mark-installs mark-installs.c
 		cp mark-installs /usr/local/bin/
+		mkdir /home/PACKAGES/
 		exit 0
 	fi
 else if [[ "$1" = "-u" ]]; then
