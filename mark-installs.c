@@ -120,8 +120,6 @@ void makeinstallpkg (char pkg[])
 		if (debug==1)
 			printf("nextcommand = \"mv /tmp/%s* /home/PACKAGES/\"\n",pkg);
 		sprintf(nextcommand,"mv /tmp/%s* /home/PACKAGES/",pkg);
-		if (debug==1)
-			printf("nextcommand = \"%s\"\n",nextcommand);
 		system(nextcommand);
 	}
 	printf("Clean? (y/n) ");
