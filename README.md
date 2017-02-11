@@ -1,7 +1,7 @@
 # mark-installs
 SlackBuild installation tool, written in bash. This is obviously not intended to replace/improve pkgtools in any way. This tool is purely for convenience's sake.
 
-To install, do `mv mark-installs /bin/`
+To install, do `chmod +x mark-installs && mv mark-installs /bin/` as root
 
 Update 2/11/17: The project is returning to its roots as a bash script.
 
