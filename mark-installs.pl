@@ -1,11 +1,11 @@
 #!/usr/bin/perl
 use strict;
 die "Must be run as root\n" if `id -u`!=0;
-`removepkg $ARGV[1]; rm /home/PACKAGES/$ARGV[1]*` and exit if $ARGV[0] eq '-u';
+`removepkg $ARGV[1]; rm /home/PACKAGES/$ARGV[1]*`, exit if $ARGV[0] eq '-u';
 my ($auto,$clean,$pkg,$input,@srcs)=($ARGV[0] eq '-a',1,"","",());
 $pkg=$ARGV[$auto];
-die if system("tar -xf $pkg.tar.gz")!=0;
-`cp $pkg*.tar.gz $pkg/`;
+die if system("tar -xf $pkg.*")!=0;
+`cp $pkg*.* $pkg/`;
 if (not $auto) {
 	do {
 		print `ls -l`,"More source files? (Blank line if none)\n";
@@ -16,7 +16,7 @@ if (not $auto) {
 die if system("cd $pkg && ./$pkg.SlackBuild")!=0;
 `installpkg /tmp/$pkg*.t?z && mv /tmp/$pkg*.t?z /home/PACKAGES/`;
 print "Clean up? (Y/n): " and chop($clean=<STDIN>) unless $auto;
-if (not $clean||$clean=~/[Yy]/) {
+if ($auto||$clean=~/[Yy]/||not $clean) {
 	`rm -rf $pkg*`;
 	`rm $_` for (@srcs);
 }
